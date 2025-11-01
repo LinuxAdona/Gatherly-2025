@@ -135,17 +135,17 @@ Tracks:
 
 ## Tech Stack
 
-| Layer                   | Technology            |
-| ----------------------- | --------------------- |
-| **Frontend**            | HTML, CSS, JavaScript |
-| **Backend**             | PHP                   |
-| **Database**            | MySQL                 |
-| **Chat System**         | Socket.IO             |
-| **Machine Learning**    | Python (scikit-learn) |
-| **Maps API**            | Google Maps           |
-| **Payment (Test Only)** | Stripe / PayPal       |
-| **Deployment**          | Docker (optional)     |
-| **Version Control**     | Git & GitHub          |
+| Layer                   | Technology                          |
+| ----------------------- | ----------------------------------- |
+| **Frontend**            | HTML, CSS (TailwindCSS), JavaScript |
+| **Backend**             | PHP                                 |
+| **Database**            | MySQL                               |
+| **Chat System**         | Socket.IO                           |
+| **Machine Learning**    | Python (scikit-learn)               |
+| **Maps API**            | Google Maps                         |
+| **Payment (Test Only)** | Stripe / PayPal                     |
+| **Deployment**          | Docker (optional)                   |
+| **Version Control**     | Git & GitHub                        |
 
 ---
 
@@ -260,7 +260,7 @@ dynamic_price = base_price × season_factor × day_factor × demand_factor
 ## System Architecture
 
 ```
-Frontend (HTML + CSS + JavaScript)
+Frontend (HTML + CSS (TailwindCSS) + JavaScript)
         ↓
 Backend (PHP - XAMPP / Apache Server)
         ↓
