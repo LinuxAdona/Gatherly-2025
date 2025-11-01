@@ -1,13 +1,16 @@
 # Gatherly GEMS - API Documentation
 
 ## Base URL
+
 ```
 Development: http://localhost/Gatherly-2025/backend/api
 Production: https://yourdomain.com/api
 ```
 
 ## Authentication
+
 All protected endpoints require a Bearer token in the Authorization header:
+
 ```
 Authorization: Bearer YOUR_JWT_TOKEN
 ```
@@ -17,11 +20,13 @@ Authorization: Bearer YOUR_JWT_TOKEN
 ## Authentication Endpoints
 
 ### Register User
+
 **POST** `/auth/register`
 
 Create a new user account (organizer or venue manager).
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com",
@@ -33,6 +38,7 @@ Create a new user account (organizer or venue manager).
 ```
 
 **Validation Rules:**
+
 - `email`: Required, valid email format, unique
 - `password`: Required, min 8 chars, must contain uppercase, lowercase, number, special char
 - `full_name`: Required
@@ -40,6 +46,7 @@ Create a new user account (organizer or venue manager).
 - `role`: Required, must be "organizer" or "venue_manager"
 
 **Response (201):**
+
 ```json
 {
   "success": true,
@@ -60,11 +67,13 @@ Create a new user account (organizer or venue manager).
 ---
 
 ### Login
+
 **POST** `/auth/login`
 
 Authenticate user and receive JWT token.
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com",
@@ -73,6 +82,7 @@ Authenticate user and receive JWT token.
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -95,16 +105,19 @@ Authenticate user and receive JWT token.
 ---
 
 ### Get Current User Profile
+
 **GET** `/auth/me`
 
 Get authenticated user's profile information.
 
 **Headers:**
+
 ```
 Authorization: Bearer YOUR_JWT_TOKEN
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -127,16 +140,19 @@ Authorization: Bearer YOUR_JWT_TOKEN
 ---
 
 ### Update Profile
+
 **PUT** `/auth/profile`
 
 Update user profile information.
 
 **Headers:**
+
 ```
 Authorization: Bearer YOUR_JWT_TOKEN
 ```
 
 **Request Body:**
+
 ```json
 {
   "full_name": "John Updated Doe",
@@ -146,6 +162,7 @@ Authorization: Bearer YOUR_JWT_TOKEN
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -165,16 +182,19 @@ Authorization: Bearer YOUR_JWT_TOKEN
 ---
 
 ### Change Password
+
 **POST** `/auth/change-password`
 
 Change user password.
 
 **Headers:**
+
 ```
 Authorization: Bearer YOUR_JWT_TOKEN
 ```
 
 **Request Body:**
+
 ```json
 {
   "current_password": "OldPass@123",
@@ -183,6 +203,7 @@ Authorization: Bearer YOUR_JWT_TOKEN
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -197,11 +218,13 @@ Authorization: Bearer YOUR_JWT_TOKEN
 ## Health Check
 
 ### API Health Status
+
 **GET** `/health`
 
 Check if API is running.
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -220,6 +243,7 @@ Check if API is running.
 ## Error Responses
 
 ### Validation Error (422)
+
 ```json
 {
   "success": false,
@@ -236,6 +260,7 @@ Check if API is running.
 ```
 
 ### Unauthorized (401)
+
 ```json
 {
   "success": false,
@@ -245,6 +270,7 @@ Check if API is running.
 ```
 
 ### Forbidden (403)
+
 ```json
 {
   "success": false,
@@ -254,6 +280,7 @@ Check if API is running.
 ```
 
 ### Not Found (404)
+
 ```json
 {
   "success": false,
@@ -263,6 +290,7 @@ Check if API is running.
 ```
 
 ### Server Error (500)
+
 ```json
 {
   "success": false,
@@ -288,12 +316,15 @@ Check if API is running.
 ---
 
 ## Rate Limiting
+
 - Rate limiting will be implemented in production
 - Current: No limits in development
 
 ## Versioning
+
 - Current version: v1.0.0
 - API follows semantic versioning
 
 ## Support
+
 For API support, contact: support@gatherly.com

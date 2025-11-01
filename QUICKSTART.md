@@ -3,6 +3,7 @@
 ## 🚀 Getting Started in 5 Minutes
 
 ### Prerequisites
+
 - XAMPP (Apache + MySQL + PHP 7.4+)
 - Web browser
 - Text editor
@@ -12,6 +13,7 @@
 ## Step 1: Database Setup
 
 ### Windows Users
+
 1. Open Command Prompt in project directory
 2. Run the setup script:
    ```cmd
@@ -20,6 +22,7 @@
 3. Follow the prompts to create database and load seed data
 
 ### Linux/Mac Users
+
 1. Open Terminal in project directory
 2. Make script executable:
    ```bash
@@ -32,6 +35,7 @@
 4. Follow the prompts to create database and load seed data
 
 ### Manual Setup (Alternative)
+
 1. Start XAMPP and open phpMyAdmin (http://localhost/phpmyadmin)
 2. Create database: `gatherly_db`
 3. Import SQL files in order:
@@ -43,21 +47,23 @@
 ## Step 2: Configure Environment
 
 1. Copy `.env.example` to `.env`:
+
    ```bash
    # Windows
    copy .env.example .env
-   
+
    # Linux/Mac
    cp .env.example .env
    ```
 
 2. Edit `.env` file with your settings:
+
    ```env
    DB_HOST=localhost
    DB_NAME=gatherly_db
    DB_USER=root
    DB_PASSWORD=
-   
+
    JWT_SECRET=your_secret_key_here
    ```
 
@@ -74,12 +80,15 @@
 ## Step 4: Test Installation
 
 ### 1. Test API Health
+
 Open browser and visit:
+
 ```
 http://localhost/Gatherly-2025/backend/api/health
 ```
 
 Expected response:
+
 ```json
 {
   "success": true,
@@ -93,7 +102,9 @@ Expected response:
 ```
 
 ### 2. View Landing Page
+
 Open browser and visit:
+
 ```
 http://localhost/Gatherly-2025/frontend
 ```
@@ -103,17 +114,21 @@ http://localhost/Gatherly-2025/frontend
 ## Step 5: Test User Accounts
 
 ### Test Login Credentials
+
 After loading seed data, you can login with:
 
 **Admin Account:**
+
 - Email: `admin@gatherly.com`
 - Password: `Admin@123`
 
 **Venue Manager:**
+
 - Email: `manager1@venues.com`
 - Password: `Manager@123`
 
 **Event Organizer:**
+
 - Email: `organizer1@events.com`
 - Password: `Organizer@123`
 
@@ -124,6 +139,7 @@ After loading seed data, you can login with:
 ### Using cURL
 
 #### Register New User
+
 ```bash
 curl -X POST http://localhost/Gatherly-2025/backend/api/auth/register \
   -H "Content-Type: application/json" \
@@ -137,6 +153,7 @@ curl -X POST http://localhost/Gatherly-2025/backend/api/auth/register \
 ```
 
 #### Login
+
 ```bash
 curl -X POST http://localhost/Gatherly-2025/backend/api/auth/login \
   -H "Content-Type: application/json" \
@@ -147,12 +164,14 @@ curl -X POST http://localhost/Gatherly-2025/backend/api/auth/login \
 ```
 
 #### Get Profile (requires token)
+
 ```bash
 curl -X GET http://localhost/Gatherly-2025/backend/api/auth/me \
   -H "Authorization: Bearer YOUR_JWT_TOKEN_HERE"
 ```
 
 ### Using Postman
+
 1. Import the API collection (coming soon)
 2. Set base URL: `http://localhost/Gatherly-2025/backend/api`
 3. Test endpoints from the collection
@@ -195,11 +214,13 @@ Gatherly-2025/
 ## 📚 Next Steps
 
 1. **Read Documentation**
+
    - [API Documentation](docs/API.md)
    - [System Architecture](docs/ARCHITECTURE.md)
    - [Deployment Guide](docs/DEPLOYMENT.md)
 
 2. **Explore Sample Data**
+
    - 6 sample venues with different types
    - 15 amenities
    - 90 days of availability
@@ -215,21 +236,25 @@ Gatherly-2025/
 ## 🐛 Troubleshooting
 
 ### Database Connection Error
+
 - Verify MySQL is running in XAMPP
 - Check credentials in `.env` file
 - Ensure database `gatherly_db` exists
 
 ### 404 Errors on API
+
 - Check Apache is running
 - Verify mod_rewrite is enabled
 - Check `.htaccess` file exists in backend/
 
 ### JWT Token Errors
+
 - Set `JWT_SECRET` in `.env` file
 - Ensure token format: `Bearer YOUR_TOKEN`
 - Check token hasn't expired
 
 ### Permission Denied (Linux/Mac)
+
 ```bash
 chmod -R 755 backend/
 chmod -R 777 logs/
@@ -249,6 +274,7 @@ chmod -R 777 contracts/
 ## 🎉 Success!
 
 If you've completed all steps successfully:
+
 - ✅ Database is set up
 - ✅ API is running
 - ✅ Frontend is accessible

@@ -1,6 +1,7 @@
 # Gatherly GEMS - System Architecture
 
 ## Overview
+
 Gatherly is a full-stack event management and venue booking platform built with PHP backend, HTML/CSS/JS frontend, MySQL database, and Python ML services.
 
 ---
@@ -110,6 +111,7 @@ Gatherly is a full-stack event management and venue booking platform built with 
 ## Technology Stack
 
 ### Frontend
+
 - **HTML5**: Semantic markup
 - **TailwindCSS**: Utility-first CSS framework
 - **Vanilla JavaScript**: Client-side interactivity
@@ -117,6 +119,7 @@ Gatherly is a full-stack event management and venue booking platform built with 
 - **Socket.IO Client**: Real-time chat
 
 ### Backend (PHP)
+
 - **PHP 7.4+**: Server-side logic
 - **PDO**: Database abstraction layer
 - **Custom Router**: RESTful routing
@@ -124,12 +127,14 @@ Gatherly is a full-stack event management and venue booking platform built with 
 - **bcrypt**: Password hashing
 
 ### Database
+
 - **MySQL 5.7+**: Relational database
 - **InnoDB**: Transaction support
 - **Full-text indexes**: Search optimization
 - **Foreign keys**: Referential integrity
 
 ### Machine Learning (Python)
+
 - **Flask**: REST API framework
 - **scikit-learn**: ML algorithms
 - **Prophet**: Time series forecasting
@@ -137,11 +142,13 @@ Gatherly is a full-stack event management and venue booking platform built with 
 - **NumPy**: Numerical computing
 
 ### Real-Time Communication
+
 - **Node.js**: JavaScript runtime
 - **Socket.IO**: WebSocket library
 - **Express**: Web framework
 
 ### External APIs
+
 - **Google Maps API**: Location services
 - **PayPal SDK**: Payment processing
 - **GCash API**: Local payment gateway
@@ -152,25 +159,30 @@ Gatherly is a full-stack event management and venue booking platform built with 
 ## Design Patterns
 
 ### 1. MVC (Model-View-Controller)
+
 - **Models**: Data access and business logic
 - **Views**: Frontend templates (HTML)
 - **Controllers**: Request handlers
 
 ### 2. Repository Pattern
+
 - Models abstract database operations
 - Separation of data access from business logic
 
 ### 3. Middleware Pattern
+
 - Authentication verification
 - CORS handling
 - Request logging
 - Error handling
 
 ### 4. Singleton Pattern
+
 - Database connection
 - Configuration loader
 
 ### 5. Factory Pattern
+
 - Response formatting
 - JWT token generation
 
@@ -179,24 +191,28 @@ Gatherly is a full-stack event management and venue booking platform built with 
 ## Security Measures
 
 ### Authentication & Authorization
+
 - JWT-based stateless authentication
 - Role-based access control (RBAC)
 - Password hashing with bcrypt
 - Token expiration and refresh
 
 ### Input Validation
+
 - Server-side validation for all inputs
 - XSS prevention through sanitization
 - SQL injection prevention via PDO prepared statements
 - CSRF token validation
 
 ### Security Headers
+
 - X-Content-Type-Options: nosniff
 - X-Frame-Options: SAMEORIGIN
 - X-XSS-Protection: 1; mode=block
 - Content-Security-Policy (to be implemented)
 
 ### Data Protection
+
 - HTTPS enforcement (production)
 - Environment variable protection
 - Database credential encryption
@@ -207,23 +223,27 @@ Gatherly is a full-stack event management and venue booking platform built with 
 ## Database Design Principles
 
 ### Normalization
+
 - 3NF compliance
 - Elimination of data redundancy
 - Proper foreign key relationships
 
 ### Indexing Strategy
+
 - Primary keys on all tables
 - Foreign key indexes
 - Composite indexes for common queries
 - Full-text indexes for search
 
 ### Data Integrity
+
 - Foreign key constraints
 - CHECK constraints for validation
 - NOT NULL constraints
 - UNIQUE constraints
 
 ### Performance Optimization
+
 - Query optimization
 - Index usage
 - Connection pooling
@@ -234,12 +254,14 @@ Gatherly is a full-stack event management and venue booking platform built with 
 ## API Design Principles
 
 ### RESTful Architecture
+
 - Resource-based URLs
 - HTTP methods (GET, POST, PUT, DELETE)
 - Stateless communication
 - Standard HTTP status codes
 
 ### Response Format
+
 ```json
 {
   "success": boolean,
@@ -251,6 +273,7 @@ Gatherly is a full-stack event management and venue booking platform built with 
 ```
 
 ### Error Handling
+
 - Standardized error responses
 - Descriptive error messages
 - Proper HTTP status codes
@@ -261,23 +284,27 @@ Gatherly is a full-stack event management and venue booking platform built with 
 ## Scalability Considerations
 
 ### Horizontal Scaling
+
 - Stateless API design
 - Session storage in database/Redis
 - Load balancing ready
 
 ### Caching Strategy
+
 - Database query caching
 - API response caching
 - Static asset caching
 - CDN integration
 
 ### Database Optimization
+
 - Connection pooling
 - Query optimization
 - Index optimization
 - Partitioning for large tables
 
 ### Microservices Ready
+
 - ML service separated
 - Chat service separated
 - Payment service abstraction
@@ -288,12 +315,14 @@ Gatherly is a full-stack event management and venue booking platform built with 
 ## Monitoring & Logging
 
 ### Application Logging
+
 - Error logs
 - Access logs
 - Performance logs
 - Security audit logs
 
 ### Metrics to Track
+
 - API response times
 - Database query performance
 - Error rates
@@ -301,6 +330,7 @@ Gatherly is a full-stack event management and venue booking platform built with 
 - Booking conversion rates
 
 ### Alerting
+
 - Server downtime alerts
 - Error threshold alerts
 - Security breach alerts
@@ -311,6 +341,7 @@ Gatherly is a full-stack event management and venue booking platform built with 
 ## Development Workflow
 
 ### Git Branching Strategy
+
 ```
 main (production)
   ├── develop (integration)
@@ -322,6 +353,7 @@ main (production)
 ```
 
 ### Code Review Process
+
 1. Create feature branch
 2. Implement feature
 3. Write tests
@@ -338,21 +370,25 @@ main (production)
 ## Testing Strategy
 
 ### Unit Tests
+
 - Model methods
 - Utility functions
 - Business logic
 
 ### Integration Tests
+
 - API endpoints
 - Database operations
 - External service integration
 
 ### E2E Tests
+
 - Complete booking flow
 - User registration and login
 - Venue search and filter
 
 ### Performance Tests
+
 - Load testing
 - Stress testing
 - Spike testing
@@ -362,6 +398,7 @@ main (production)
 ## Deployment Architecture
 
 ### Development
+
 ```
 XAMPP (Windows/Mac/Linux)
 ├── Apache Web Server
@@ -370,6 +407,7 @@ XAMPP (Windows/Mac/Linux)
 ```
 
 ### Production
+
 ```
 Cloud Provider (AWS/Azure/DigitalOcean)
 ├── Web Server (Nginx/Apache)
@@ -385,18 +423,21 @@ Cloud Provider (AWS/Azure/DigitalOcean)
 ## Future Enhancements
 
 ### Phase 2
+
 - Mobile app (React Native)
 - Advanced analytics dashboard
 - SMS notifications
 - Multiple language support
 
 ### Phase 3
+
 - AI chatbot support
 - Virtual venue tours (360°)
 - Blockchain-based contracts
 - Integration with calendar apps
 
 ### Phase 4
+
 - Marketplace for vendors
 - Event insurance integration
 - Social media integration
@@ -407,12 +448,14 @@ Cloud Provider (AWS/Azure/DigitalOcean)
 ## Support & Maintenance
 
 ### Regular Maintenance
+
 - Database backups (daily)
 - Security updates (monthly)
 - Performance optimization (quarterly)
 - Feature updates (as needed)
 
 ### Support Channels
+
 - Email: support@gatherly.com
 - Documentation: https://docs.gatherly.com
 - Community Forum: https://forum.gatherly.com

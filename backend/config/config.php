@@ -1,11 +1,13 @@
 <?php
+
 /**
  * Application Configuration
  * Loads environment variables and sets global constants
  */
 
 // Load environment variables from .env file
-function loadEnv($path) {
+function loadEnv($path)
+{
     if (!file_exists($path)) {
         return false;
     }
@@ -22,10 +24,10 @@ function loadEnv($path) {
             list($key, $value) = explode('=', $line, 2);
             $key = trim($key);
             $value = trim($value);
-            
+
             // Remove quotes if present
             $value = trim($value, '"\'');
-            
+
             // Set environment variable
             if (!array_key_exists($key, $_ENV)) {
                 $_ENV[$key] = $value;

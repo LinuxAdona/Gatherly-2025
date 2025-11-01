@@ -1,4 +1,5 @@
 <?php
+
 /**
  * API Entry Point
  * Main index file for the backend API
@@ -22,7 +23,7 @@ $router = new Router();
 registerAuthRoutes($router);
 
 // Health check endpoint
-$router->get('/api/health', function() {
+$router->get('/api/health', function () {
     Response::success([
         'status' => 'healthy',
         'timestamp' => date('c'),
@@ -31,7 +32,7 @@ $router->get('/api/health', function() {
 });
 
 // 404 handler
-$router->notFound(function() {
+$router->notFound(function () {
     Response::notFound('Endpoint not found');
 });
 
