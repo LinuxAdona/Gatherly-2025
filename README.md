@@ -32,14 +32,14 @@ It solves the common pain points of event organizers and venue owners by integra
 
 ---
 
-## 🧠 Introduction
+## Introduction
 
 Gatherly (GEMS) aims to improve the **events and venue management industry** by combining intelligent recommendations, automated scheduling, and analytics.  
 It benefits both **event organizers** and **venue managers** through automation, real-time data, and predictive insights.
 
 ---
 
-## ❗ Key Issues
+## Key Issues
 
 - Difficulty in finding suitable venues quickly.
 - Manual management of schedules causing **double-bookings**.
@@ -49,7 +49,7 @@ It benefits both **event organizers** and **venue managers** through automation,
 
 ---
 
-## 💡 Solutions
+## Solutions
 
 | Feature                               | Description                                                                             |
 | ------------------------------------- | --------------------------------------------------------------------------------------- |
@@ -67,7 +67,7 @@ It benefits both **event organizers** and **venue managers** through automation,
 
 ---
 
-## 🧑‍💼 Target Clients
+## Target Clients
 
 - **Event Organizers:** Companies or individuals managing weddings, concerts, corporate events, etc.
 - **Venue Owners/Managers:** Gyms, hotels, convention centers, and coliseums.
@@ -75,7 +75,7 @@ It benefits both **event organizers** and **venue managers** through automation,
 
 ---
 
-## 🧠 Smart Features Overview
+## Smart Features Overview
 
 ### Multi-Criteria Decision-Making (MCDM)
 
@@ -115,7 +115,7 @@ Tracks:
 
 ---
 
-## 🛠️ Development Plan (Agent AI Prompt Summary)
+## Development Plan
 
 **Goal:** Develop GEMS as a production-ready, intelligent, and scalable system.
 
@@ -133,7 +133,7 @@ Tracks:
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 | Layer                   | Technology            |
 | ----------------------- | --------------------- |
@@ -149,7 +149,7 @@ Tracks:
 
 ---
 
-## 🗄️ Database Schema (Simplified)
+## Database Schema (Simplified)
 
 | Table                  | Description                                  |
 | ---------------------- | -------------------------------------------- |
@@ -164,7 +164,7 @@ Tracks:
 
 ---
 
-## 📡 API Endpoints (Sample)
+## API Endpoints (Sample)
 
 | Method | Endpoint                  | Description                   |
 | ------ | ------------------------- | ----------------------------- |
@@ -177,7 +177,7 @@ Tracks:
 
 ---
 
-## 🔮 Recommendation System
+## Recommendation System
 
 **Formula Example:**
 
@@ -241,7 +241,7 @@ LIMIT 3;
 
 ---
 
-## 📈 Dynamic Pricing & Forecasting
+## Dynamic Pricing & Forecasting
 
 **Formula Example:**
 
@@ -257,7 +257,7 @@ dynamic_price = base_price × season_factor × day_factor × demand_factor
 
 ---
 
-## 🧱 System Architecture
+## System Architecture
 
 ```
 Frontend (HTML + CSS + JavaScript)
@@ -276,7 +276,7 @@ Integrations
 
 ---
 
-## 💻 UI & UX Expectations
+## UI & UX Expectations
 
 **Organizer Flow**
 
@@ -297,7 +297,7 @@ Search for venues
 
 ---
 
-## 📊 Dashboard & Analytics
+## Dashboard & Analytics
 
 - Venue occupancy trends
 - Event popularity statistics
@@ -307,7 +307,7 @@ Search for venues
 
 ---
 
-## 🧪 Testing & QA
+## Testing & QA
 
 - **Unit Tests:** Availability, price, scoring
 - **Integration Tests:** Booking flow with concurrency
@@ -317,7 +317,7 @@ Search for venues
 
 ---
 
-## 🚀 Deliverables per Cycle
+## Deliverables per Cycle
 
 1. API & Architecture Docs
 2. Backend Services
@@ -329,7 +329,7 @@ Search for venues
 
 ---
 
-## ✅ Acceptance Criteria
+## Acceptance Criteria
 
 - No double-bookings under concurrency
 - Recommendations explainable & ranked
@@ -339,7 +339,7 @@ Search for venues
 
 ---
 
-## 📊 Monitoring & Observability
+## Monitoring & Observability
 
 Metrics:
 
@@ -351,7 +351,7 @@ Metrics:
 
 ---
 
-## 🎉 Example Scenarios
+## Example Scenarios
 
 **Example Input:**
 
@@ -373,7 +373,7 @@ Top 3 venues with suitability scores, pricing adjustments, and travel time estim
 
 ---
 
-## 📜 License
+## License
 
 CareTech © 2025 Gatherly Developers
 Developed for the Events and Venue Management Industry with ❤️
