@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venues - Gatherly GEMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .venue-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .venue-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        .slider-track {
+            background: linear-gradient(to right, #3B82F6 0%, #3B82F6 var(--value), #E5E7EB var(--value), #E5E7EB 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="/" class="text-2xl font-bold text-blue-600">
+                    <i class="fas fa-calendar-check mr-2"></i>Gatherly GEMS
+                </a>
+                <div class="space-x-4">
+                    <a href="/" class="text-gray-700 hover:text-blue-600">Home</a>
+                    <a href="/pages/venues.html" class="text-blue-600 font-semibold">Venues</a>
+                    <a href="/pages/events.html" class="text-gray-700 hover:text-blue-600">Events</a>
+                    <button id="loginBtn" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-4">
+                <i class="fas fa-building mr-3"></i>Find Your Perfect Venue
+            </h1>
+            <p class="text-xl text-blue-100 mb-8">
+                Browse through our collection of premium event venues
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-6">
+            
+            <!-- Filters Sidebar -->
+            <aside class="lg:w-1/4">
+                <div class="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-filter mr-2 text-blue-600"></i>
+                        Filters
+                    </h2>
+                    
+                    <!-- Search -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-2">
+                            <i class="fas fa-search mr-1"></i>Search
+                        </label>
+                        <input type="text" id="searchInput" 
+                               placeholder="Venue name, city..." 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    
+                    <!-- Venue Type -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-2">
+                            <i class="fas fa-building mr-1"></i>Venue Type
+                        </label>
+                        <select id="typeFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="">All Types</option>
+                            <option value="conference_hall">Conference Hall</option>
+                            <option value="banquet_hall">Banquet Hall</option>
+                            <option value="outdoor_space">Outdoor Space</option>
+                            <option value="hotel_ballroom">Hotel Ballroom</option>
+                            <option value="auditorium">Auditorium</option>
+                            <option value="meeting_room">Meeting Room</option>
+                            <option value="exhibition_center">Exhibition Center</option>
+                        </select>
+                    </div>
+                    
+                    <!-- City -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-2">
+                            <i class="fas fa-map-marker-alt mr-1"></i>City
+                        </label>
+                        <input type="text" id="cityFilter" 
+                               placeholder="Enter city name" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    
+                    <!-- Capacity Range -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-2">
+                            <i class="fas fa-users mr-1"></i>Capacity
+                        </label>
+                        <div class="flex gap-2 mb-2">
+                            <input type="number" id="minCapacity" placeholder="Min" 
+                                   class="w-1/2 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <input type="number" id="maxCapacity" placeholder="Max" 
+                                   class="w-1/2 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="text-xs text-gray-500">
+                            <span id="capacityRange">Any capacity</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Price Range -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-2">
+                            <i class="fas fa-dollar-sign mr-1"></i>Price per Hour
+                        </label>
+                        <div class="flex gap-2 mb-2">
+                            <input type="number" id="minPrice" placeholder="Min" 
+                                   class="w-1/2 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <input type="number" id="maxPrice" placeholder="Max" 
+                                   class="w-1/2 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="text-xs text-gray-500">
+                            <span id="priceRange">Any price</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Buttons -->
+                    <div class="space-y-2">
+                        <button id="applyFilters" 
+                                class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-check mr-2"></i>Apply Filters
+                        </button>
+                        <button id="clearFilters" 
+                                class="w-full bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300 transition">
+                            <i class="fas fa-times mr-2"></i>Clear All
+                        </button>
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Venues List -->
+            <main class="lg:w-3/4">
+                <!-- Results Header -->
+                <div class="bg-white rounded-lg shadow-lg p-4 mb-6 flex justify-between items-center">
+                    <div>
+                        <span id="resultsCount" class="text-lg font-semibold">Loading venues...</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <select id="sortBy" class="px-4 py-2 border border-gray-300 rounded-lg">
+                            <option value="created_at_desc">Newest First</option>
+                            <option value="created_at_asc">Oldest First</option>
+                            <option value="price_asc">Price: Low to High</option>
+                            <option value="price_desc">Price: High to Low</option>
+                            <option value="capacity_asc">Capacity: Low to High</option>
+                            <option value="capacity_desc">Capacity: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Loading State -->
+                <div id="loadingState" class="text-center py-12">
+                    <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                    <p class="text-gray-600 mt-4">Loading venues...</p>
+                </div>
+                
+                <!-- Empty State -->
+                <div id="emptyState" class="hidden bg-white rounded-lg shadow-lg p-12 text-center">
+                    <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-gray-700 mb-2">No venues found</h3>
+                    <p class="text-gray-600 mb-6">Try adjusting your filters or search criteria</p>
+                    <button onclick="clearAllFilters()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                        Clear Filters
+                    </button>
+                </div>
+                
+                <!-- Venues Grid -->
+                <div id="venuesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <!-- Venue cards will be inserted here -->
+                </div>
+                
+                <!-- Pagination -->
+                <div id="pagination" class="hidden bg-white rounded-lg shadow-lg p-4">
+                    <div class="flex justify-between items-center">
+                        <button id="prevPage" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <i class="fas fa-chevron-left mr-2"></i>Previous
+                        </button>
+                        <div id="pageInfo" class="text-gray-700 font-semibold">
+                            Page 1
+                        </div>
+                        <button id="nextPage" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                            Next<i class="fas fa-chevron-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Gatherly GEMS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // State management
+        let currentPage = 1;
+        let totalPages = 1;
+        const limit = 12;
+        
+        let filters = {
+            search: '',
+            type: '',
+            city: '',
+            minCapacity: '',
+            maxCapacity: '',
+            minPrice: '',
+            maxPrice: '',
+            sortBy: 'created_at_desc'
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadVenues();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Filter buttons
+            document.getElementById('applyFilters').addEventListener('click', applyFilters);
+            document.getElementById('clearFilters').addEventListener('click', clearAllFilters);
+            
+            // Sort
+            document.getElementById('sortBy').addEventListener('change', (e) => {
+                filters.sortBy = e.target.value;
+                currentPage = 1;
+                loadVenues();
+            });
+            
+            // Pagination
+            document.getElementById('prevPage').addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    loadVenues();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+            
+            document.getElementById('nextPage').addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    loadVenues();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+            
+            // Real-time capacity/price display
+            ['minCapacity', 'maxCapacity'].forEach(id => {
+                document.getElementById(id).addEventListener('input', updateCapacityDisplay);
+            });
+            
+            ['minPrice', 'maxPrice'].forEach(id => {
+                document.getElementById(id).addEventListener('input', updatePriceDisplay);
+            });
+            
+            // Enter key to search
+            document.getElementById('searchInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') applyFilters();
+            });
+        }
+
+        function applyFilters() {
+            filters.search = document.getElementById('searchInput').value;
+            filters.type = document.getElementById('typeFilter').value;
+            filters.city = document.getElementById('cityFilter').value;
+            filters.minCapacity = document.getElementById('minCapacity').value;
+            filters.maxCapacity = document.getElementById('maxCapacity').value;
+            filters.minPrice = document.getElementById('minPrice').value;
+            filters.maxPrice = document.getElementById('maxPrice').value;
+            
+            currentPage = 1;
+            loadVenues();
+        }
+
+        function clearAllFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('typeFilter').value = '';
+            document.getElementById('cityFilter').value = '';
+            document.getElementById('minCapacity').value = '';
+            document.getElementById('maxCapacity').value = '';
+            document.getElementById('minPrice').value = '';
+            document.getElementById('maxPrice').value = '';
+            
+            filters = {
+                search: '',
+                type: '',
+                city: '',
+                minCapacity: '',
+                maxCapacity: '',
+                minPrice: '',
+                maxPrice: '',
+                sortBy: filters.sortBy
+            };
+            
+            updateCapacityDisplay();
+            updatePriceDisplay();
+            currentPage = 1;
+            loadVenues();
+        }
+
+        function updateCapacityDisplay() {
+            const min = document.getElementById('minCapacity').value;
+            const max = document.getElementById('maxCapacity').value;
+            const display = document.getElementById('capacityRange');
+            
+            if (min && max) {
+                display.textContent = `${min} - ${max} people`;
+            } else if (min) {
+                display.textContent = `${min}+ people`;
+            } else if (max) {
+                display.textContent = `Up to ${max} people`;
+            } else {
+                display.textContent = 'Any capacity';
+            }
+        }
+
+        function updatePriceDisplay() {
+            const min = document.getElementById('minPrice').value;
+            const max = document.getElementById('maxPrice').value;
+            const display = document.getElementById('priceRange');
+            
+            if (min && max) {
+                display.textContent = `$${min} - $${max}/hr`;
+            } else if (min) {
+                display.textContent = `From $${min}/hr`;
+            } else if (max) {
+                display.textContent = `Up to $${max}/hr`;
+            } else {
+                display.textContent = 'Any price';
+            }
+        }
+
+        async function loadVenues() {
+            showLoading();
+            
+            try {
+                // Build query string
+                const params = new URLSearchParams();
+                params.append('page', currentPage);
+                params.append('limit', limit);
+                
+                if (filters.search) params.append('search', filters.search);
+                if (filters.type) params.append('type', filters.type);
+                if (filters.city) params.append('city', filters.city);
+                if (filters.minCapacity) params.append('minCapacity', filters.minCapacity);
+                if (filters.maxCapacity) params.append('maxCapacity', filters.maxCapacity);
+                if (filters.minPrice) params.append('minPrice', filters.minPrice);
+                if (filters.maxPrice) params.append('maxPrice', filters.maxPrice);
+                if (filters.sortBy) params.append('sortBy', filters.sortBy);
+                
+                const response = await fetch(`/backend/index.php/api/venues?${params.toString()}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayVenues(data.data.venues);
+                    updatePagination(data.data.pagination);
+                } else {
+                    showError(data.message);
+                }
+            } catch (error) {
+                console.error('Error loading venues:', error);
+                showError('Failed to load venues. Please try again.');
+            }
+        }
+
+        function displayVenues(venues) {
+            const grid = document.getElementById('venuesGrid');
+            const loadingState = document.getElementById('loadingState');
+            const emptyState = document.getElementById('emptyState');
+            
+            loadingState.classList.add('hidden');
+            
+            if (venues.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            
+            emptyState.classList.add('hidden');
+            
+            grid.innerHTML = venues.map(venue => createVenueCard(venue)).join('');
+        }
+
+        function createVenueCard(venue) {
+            const images = JSON.parse(venue.images || '[]');
+            const primaryImage = images[0] || 'https://via.placeholder.com/400x300?text=No+Image';
+            
+            const typeLabels = {
+                'conference_hall': 'Conference Hall',
+                'banquet_hall': 'Banquet Hall',
+                'outdoor_space': 'Outdoor Space',
+                'hotel_ballroom': 'Hotel Ballroom',
+                'auditorium': 'Auditorium',
+                'meeting_room': 'Meeting Room',
+                'exhibition_center': 'Exhibition Center'
+            };
+            
+            return `
+                <div class="venue-card bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer" 
+                     onclick="viewVenue(${venue.venue_id})">
+                    <div class="relative">
+                        <img src="${primaryImage}" 
+                             alt="${venue.venue_name}" 
+                             class="w-full h-48 object-cover">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            $${parseFloat(venue.base_price).toFixed(0)}/hr
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">${venue.venue_name}</h3>
+                        <p class="text-sm text-gray-600 mb-4">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            ${venue.city}, ${venue.state}
+                        </p>
+                        
+                        <div class="flex items-center gap-4 mb-4 text-sm text-gray-600">
+                            <span>
+                                <i class="fas fa-users mr-1"></i>
+                                ${venue.max_capacity} people
+                            </span>
+                            <span>
+                                <i class="fas fa-building mr-1"></i>
+                                ${typeLabels[venue.venue_type] || venue.venue_type}
+                            </span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center text-yellow-500">
+                                <i class="fas fa-star mr-1"></i>
+                                <span class="font-semibold">${parseFloat(venue.popularity_score).toFixed(1)}</span>
+                            </div>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updatePagination(pagination) {
+            totalPages = pagination.totalPages;
+            
+            document.getElementById('resultsCount').textContent = 
+                `${pagination.total} venue${pagination.total !== 1 ? 's' : ''} found`;
+            
+            document.getElementById('pageInfo').textContent = 
+                `Page ${pagination.currentPage} of ${pagination.totalPages}`;
+            
+            document.getElementById('prevPage').disabled = pagination.currentPage === 1;
+            document.getElementById('nextPage').disabled = pagination.currentPage === pagination.totalPages;
+            
+            document.getElementById('pagination').classList.toggle('hidden', pagination.totalPages <= 1);
+        }
+
+        function showLoading() {
+            document.getElementById('loadingState').classList.remove('hidden');
+            document.getElementById('venuesGrid').innerHTML = '';
+            document.getElementById('emptyState').classList.add('hidden');
+            document.getElementById('pagination').classList.add('hidden');
+        }
+
+        function showError(message) {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('emptyState').classList.remove('hidden');
+            document.getElementById('emptyState').querySelector('h3').textContent = 'Error Loading Venues';
+            document.getElementById('emptyState').querySelector('p').textContent = message;
+        }
+
+        function viewVenue(venueId) {
+            window.location.href = `/pages/venue-detail.html?id=${venueId}`;
+        }
+    </script>
+</body>
+</html>

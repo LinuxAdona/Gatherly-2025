@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venue Details - Gatherly GEMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .image-gallery img {
+            transition: transform 0.3s;
+        }
+        .image-gallery img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="/" class="text-2xl font-bold text-blue-600">
+                    <i class="fas fa-calendar-check mr-2"></i>Gatherly GEMS
+                </a>
+                <div class="space-x-4">
+                    <a href="/" class="text-gray-700 hover:text-blue-600">Home</a>
+                    <a href="/pages/venues.html" class="text-gray-700 hover:text-blue-600">Venues</a>
+                    <a href="/pages/events.html" class="text-gray-700 hover:text-blue-600">Events</a>
+                    <button id="loginBtn" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="text-center py-12">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <p class="text-gray-600 mt-4">Loading venue details...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" class="hidden container mx-auto px-4 py-12 text-center">
+        <i class="fas fa-exclamation-circle text-6xl text-red-500 mb-4"></i>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">Venue Not Found</h2>
+        <p class="text-gray-600 mb-6">The venue you're looking for doesn't exist or has been removed.</p>
+        <a href="/pages/venues.html" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+            Browse All Venues
+        </a>
+    </div>
+
+    <!-- Venue Content -->
+    <div id="venueContent" class="hidden">
+        <!-- Breadcrumb -->
+        <div class="bg-white border-b">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex items-center text-sm text-gray-600">
+                    <a href="/" class="hover:text-blue-600">Home</a>
+                    <i class="fas fa-chevron-right mx-2 text-xs"></i>
+                    <a href="/pages/venues.html" class="hover:text-blue-600">Venues</a>
+                    <i class="fas fa-chevron-right mx-2 text-xs"></i>
+                    <span id="breadcrumbVenue" class="text-gray-900">Venue</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Left Column - Main Info -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Image Gallery -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div id="mainImage" class="w-full h-96 bg-gray-200"></div>
+                        <div id="imageGallery" class="image-gallery grid grid-cols-4 gap-2 p-4">
+                            <!-- Thumbnail images will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Venue Header -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h1 id="venueName" class="text-3xl font-bold text-gray-900 mb-2"></h1>
+                                <p id="venueLocation" class="text-lg text-gray-600">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                </p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-3xl font-bold text-blue-600" id="venuePrice"></div>
+                                <div class="text-sm text-gray-600">per hour</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-6 text-gray-700">
+                            <span id="venueType" class="flex items-center">
+                                <i class="fas fa-building mr-2"></i>
+                            </span>
+                            <span id="venueCapacity" class="flex items-center">
+                                <i class="fas fa-users mr-2"></i>
+                            </span>
+                            <span id="venueRating" class="flex items-center text-yellow-500">
+                                <i class="fas fa-star mr-2"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h2 class="text-2xl font-bold mb-4">
+                            <i class="fas fa-info-circle mr-2 text-blue-600"></i>
+                            About This Venue
+                        </h2>
+                        <p id="venueDescription" class="text-gray-700 leading-relaxed whitespace-pre-line"></p>
+                    </div>
+
+                    <!-- Amenities -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h2 class="text-2xl font-bold mb-4">
+                            <i class="fas fa-check-circle mr-2 text-blue-600"></i>
+                            Amenities
+                        </h2>
+                        <div id="amenitiesList" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            <!-- Amenities will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Venue Manager -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h2 class="text-2xl font-bold mb-4">
+                            <i class="fas fa-user-tie mr-2 text-blue-600"></i>
+                            Venue Manager
+                        </h2>
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-2xl text-blue-600"></i>
+                            </div>
+                            <div>
+                                <div id="managerName" class="text-lg font-semibold"></div>
+                                <div id="managerEmail" class="text-gray-600"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location Map -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h2 class="text-2xl font-bold mb-4">
+                            <i class="fas fa-map mr-2 text-blue-600"></i>
+                            Location
+                        </h2>
+                        <div id="venueAddress" class="mb-4 text-gray-700"></div>
+                        <div id="map" class="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+                            <div class="text-center text-gray-500">
+                                <i class="fas fa-map-marked-alt text-4xl mb-2"></i>
+                                <p>Map integration coming soon</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Booking Card -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+                        <h3 class="text-xl font-bold mb-4">Book This Venue</h3>
+                        
+                        <!-- Pricing Details -->
+                        <div class="mb-6 space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Base Price:</span>
+                                <span id="bookingBasePrice" class="font-semibold"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Cleaning Fee:</span>
+                                <span id="bookingCleaningFee" class="font-semibold"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Security Deposit:</span>
+                                <span id="bookingDeposit" class="font-semibold"></span>
+                            </div>
+                        </div>
+
+                        <!-- Availability Summary -->
+                        <div class="mb-6 p-4 bg-green-50 rounded-lg">
+                            <div class="flex items-center text-green-700 mb-2">
+                                <i class="fas fa-calendar-check mr-2"></i>
+                                <span class="font-semibold">Availability (Next 30 Days)</span>
+                            </div>
+                            <div id="availabilitySummary" class="text-sm text-gray-700">
+                                Loading availability...
+                            </div>
+                        </div>
+
+                        <!-- Booking Form -->
+                        <form id="bookingForm" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Event Date</label>
+                                <input type="date" id="eventDate" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
+                                       required>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold mb-2">Start Time</label>
+                                    <input type="time" id="startTime" 
+                                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
+                                           required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold mb-2">End Time</label>
+                                    <input type="time" id="endTime" 
+                                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
+                                           required>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Expected Attendees</label>
+                                <input type="number" id="attendees" min="1" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
+                                       required>
+                            </div>
+                            
+                            <button type="submit" 
+                                    class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+                                <i class="fas fa-calendar-plus mr-2"></i>Request Booking
+                            </button>
+                        </form>
+
+                        <div class="mt-4 text-xs text-gray-500 text-center">
+                            <i class="fas fa-shield-alt mr-1"></i>
+                            Your payment is protected
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Gatherly GEMS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let venueData = null;
+        let venueId = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get venue ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            venueId = urlParams.get('id');
+            
+            if (!venueId) {
+                showError();
+                return;
+            }
+            
+            loadVenueDetails();
+            
+            // Setup booking form
+            document.getElementById('bookingForm').addEventListener('submit', handleBooking);
+            
+            // Set minimum date to today
+            document.getElementById('eventDate').min = new Date().toISOString().split('T')[0];
+        });
+
+        async function loadVenueDetails() {
+            try {
+                const response = await fetch(`/backend/index.php/api/venues/${venueId}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    venueData = data.data.venue;
+                    displayVenueDetails(venueData);
+                } else {
+                    showError();
+                }
+            } catch (error) {
+                console.error('Error loading venue:', error);
+                showError();
+            }
+        }
+
+        function displayVenueDetails(venue) {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('venueContent').classList.remove('hidden');
+            
+            // Set page title and breadcrumb
+            document.title = `${venue.venue_name} - Gatherly GEMS`;
+            document.getElementById('breadcrumbVenue').textContent = venue.venue_name;
+            
+            // Header info
+            document.getElementById('venueName').textContent = venue.venue_name;
+            document.getElementById('venueLocation').innerHTML = `
+                <i class="fas fa-map-marker-alt mr-2"></i>
+                ${venue.address}, ${venue.city}, ${venue.state} ${venue.zip_code}
+            `;
+            document.getElementById('venuePrice').textContent = `$${parseFloat(venue.base_price).toFixed(0)}`;
+            
+            // Type labels
+            const typeLabels = {
+                'conference_hall': 'Conference Hall',
+                'banquet_hall': 'Banquet Hall',
+                'outdoor_space': 'Outdoor Space',
+                'hotel_ballroom': 'Hotel Ballroom',
+                'auditorium': 'Auditorium',
+                'meeting_room': 'Meeting Room',
+                'exhibition_center': 'Exhibition Center'
+            };
+            
+            document.getElementById('venueType').innerHTML = `
+                <i class="fas fa-building mr-2"></i>${typeLabels[venue.venue_type] || venue.venue_type}
+            `;
+            document.getElementById('venueCapacity').innerHTML = `
+                <i class="fas fa-users mr-2"></i>Up to ${venue.max_capacity} people
+            `;
+            document.getElementById('venueRating').innerHTML = `
+                <i class="fas fa-star mr-2"></i>${parseFloat(venue.popularity_score).toFixed(1)} Rating
+            `;
+            
+            // Description
+            document.getElementById('venueDescription').textContent = venue.description;
+            
+            // Images
+            displayImages(venue.images);
+            
+            // Amenities
+            displayAmenities(venue.amenities);
+            
+            // Manager info
+            document.getElementById('managerName').textContent = venue.manager_name;
+            document.getElementById('managerEmail').textContent = venue.manager_email;
+            
+            // Address
+            document.getElementById('venueAddress').innerHTML = `
+                <p class="font-semibold">${venue.venue_name}</p>
+                <p>${venue.address}</p>
+                <p>${venue.city}, ${venue.state} ${venue.zip_code}</p>
+                <p>${venue.country}</p>
+            `;
+            
+            // Booking prices
+            document.getElementById('bookingBasePrice').textContent = `$${parseFloat(venue.base_price).toFixed(2)}/hr`;
+            document.getElementById('bookingCleaningFee').textContent = `$${parseFloat(venue.cleaning_fee).toFixed(2)}`;
+            document.getElementById('bookingDeposit').textContent = `$${parseFloat(venue.security_deposit).toFixed(2)}`;
+            
+            // Availability
+            displayAvailability(venue.availability_summary);
+            
+            // Set max attendees
+            document.getElementById('attendees').max = venue.max_capacity;
+        }
+
+        function displayImages(imagesJson) {
+            const images = JSON.parse(imagesJson || '[]');
+            const mainImage = document.getElementById('mainImage');
+            const gallery = document.getElementById('imageGallery');
+            
+            if (images.length === 0) {
+                mainImage.innerHTML = `
+                    <div class="w-full h-full flex items-center justify-center bg-gray-200">
+                        <div class="text-center text-gray-400">
+                            <i class="fas fa-image text-6xl mb-2"></i>
+                            <p>No images available</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Display first image
+            mainImage.innerHTML = `<img src="${images[0]}" alt="Venue" class="w-full h-full object-cover">`;
+            
+            // Display thumbnails
+            gallery.innerHTML = images.map((img, index) => `
+                <img src="${img}" 
+                     alt="Venue ${index + 1}" 
+                     class="w-full h-24 object-cover rounded cursor-pointer hover:opacity-75"
+                     onclick="changeMainImage('${img}')">
+            `).join('');
+        }
+
+        function changeMainImage(src) {
+            document.getElementById('mainImage').innerHTML = `
+                <img src="${src}" alt="Venue" class="w-full h-full object-cover">
+            `;
+        }
+
+        function displayAmenities(amenities) {
+            const container = document.getElementById('amenitiesList');
+            
+            if (!amenities || amenities.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 col-span-full">No amenities listed</p>';
+                return;
+            }
+            
+            const categoryIcons = {
+                'basic': 'fa-check',
+                'technical': 'fa-microchip',
+                'catering': 'fa-utensils',
+                'accessibility': 'fa-wheelchair',
+                'other': 'fa-star'
+            };
+            
+            container.innerHTML = amenities.map(amenity => `
+                <div class="flex items-center gap-2 text-gray-700">
+                    <i class="fas ${categoryIcons[amenity.category] || 'fa-check'} text-green-600"></i>
+                    <span>${amenity.amenity_name}</span>
+                </div>
+            `).join('');
+        }
+
+        function displayAvailability(summary) {
+            const container = document.getElementById('availabilitySummary');
+            
+            if (!summary) {
+                container.textContent = 'Availability information not available';
+                return;
+            }
+            
+            const available = summary.available_days || 0;
+            const blocked = summary.blocked_days || 0;
+            
+            container.innerHTML = `
+                <div class="flex justify-between mb-1">
+                    <span>Available:</span>
+                    <span class="font-semibold">${available} days</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Blocked:</span>
+                    <span class="font-semibold">${blocked} days</span>
+                </div>
+            `;
+        }
+
+        function showError() {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('errorState').classList.remove('hidden');
+        }
+
+        async function handleBooking(e) {
+            e.preventDefault();
+            
+            // Check if user is logged in (you'll need to implement proper auth check)
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                alert('Please login to book a venue');
+                window.location.href = '/pages/login.html';
+                return;
+            }
+            
+            const formData = {
+                venue_id: venueId,
+                event_date: document.getElementById('eventDate').value,
+                start_time: document.getElementById('startTime').value,
+                end_time: document.getElementById('endTime').value,
+                expected_attendees: document.getElementById('attendees').value
+            };
+            
+            // Validate capacity
+            if (parseInt(formData.expected_attendees) > venueData.max_capacity) {
+                alert(`This venue can accommodate a maximum of ${venueData.max_capacity} attendees`);
+                return;
+            }
+            
+            // Here you would make an API call to create the booking
+            console.log('Booking request:', formData);
+            alert('Booking functionality will be implemented in the next cycle. Your request has been logged.');
+        }
+    </script>
+</body>
+</html>

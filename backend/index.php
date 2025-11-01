@@ -13,6 +13,8 @@ ini_set('display_errors', 1);
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/routes/Router.php';
 require_once __DIR__ . '/routes/auth.php';
+require_once __DIR__ . '/routes/venue.php';
+require_once __DIR__ . '/routes/amenity.php';
 require_once __DIR__ . '/utils/Response.php';
 require_once __DIR__ . '/utils/Logger.php';
 
@@ -21,6 +23,8 @@ $router = new Router();
 
 // Register routes
 registerAuthRoutes($router);
+registerVenueRoutes($router);
+registerAmenityRoutes($router);
 
 // Health check endpoint
 $router->get('/api/health', function () {
