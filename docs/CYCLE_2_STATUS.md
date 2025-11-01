@@ -12,6 +12,7 @@
 Cycle 2 has made significant progress with the successful implementation of the venue management backend API and frontend pages. The system now supports full CRUD operations for venues, advanced search and filtering, amenity management, and a responsive user interface for browsing and viewing venue details.
 
 **Key Achievements:**
+
 - ✅ 18 API endpoints implemented (12 new in Cycle 2)
 - ✅ 3 major controllers created (Venue, Amenity)
 - ✅ 2 fully functional frontend pages
@@ -30,6 +31,7 @@ Cycle 2 has made significant progress with the successful implementation of the 
 **Methods:** 11
 
 Implemented comprehensive venue data model with:
+
 - `create()` - Insert new venue with 20+ fields
 - `findById()` - Retrieve venue with manager info and amenities
 - `search()` - Advanced search with multi-criteria filtering
@@ -40,6 +42,7 @@ Implemented comprehensive venue data model with:
 - `belongsToManager()` - Ownership validation helper
 
 **Search Filters Supported:**
+
 1. Venue type (conference hall, banquet hall, etc.)
 2. City (exact match)
 3. Minimum capacity
@@ -53,6 +56,7 @@ Implemented comprehensive venue data model with:
 **Endpoints:** 6
 
 Implemented full CRUD controller with:
+
 - `index()` - GET /api/venues (public, search & pagination)
 - `show($id)` - GET /api/venues/:id (public, with amenities)
 - `myVenues()` - GET /api/venues/my/list (protected, manager's venues)
@@ -61,12 +65,14 @@ Implemented full CRUD controller with:
 - `delete($id)` - DELETE /api/venues/:id (protected, ownership validated)
 
 **Helper Methods:**
+
 - `getVenueAmenities()` - Fetch associated amenities
 - `addVenueAmenities()` - Link amenities to venue
 - `updateVenueAmenities()` - Update amenity associations
 - `getAvailabilitySummary()` - 30-day rolling availability
 
 **Security Features:**
+
 - JWT authentication required for protected routes
 - Role-based access control (only venue_manager can create)
 - Ownership validation (managers can only edit their venues)
@@ -80,6 +86,7 @@ Implemented full CRUD controller with:
 **Endpoints:** 6
 
 Implemented amenity management system:
+
 - `index()` - GET /api/amenities (public, list all)
 - `categories()` - GET /api/amenities/categories (public)
 - `show($id)` - GET /api/amenities/:id (public)
@@ -88,6 +95,7 @@ Implemented amenity management system:
 - `delete($id)` - DELETE /api/amenities/:id (admin only)
 
 **Categories Supported:**
+
 - Basic Facilities (WiFi, parking, AC)
 - Technical Equipment (projector, sound system, microphones)
 - Catering & Kitchen (kitchen, catering, coffee)
@@ -112,6 +120,7 @@ Registered venue and amenity routes in main API entry point
 **Features:**
 
 **UI Components:**
+
 - Responsive navigation with logo and menu
 - Hero section with gradient background
 - Filter sidebar (sticky, with 7 filter controls)
@@ -120,6 +129,7 @@ Registered venue and amenity routes in main API entry point
 - Loading and empty states
 
 **Search & Filter System:**
+
 - Text search (venue name, city, description)
 - Venue type dropdown (7 types)
 - City text input
@@ -129,6 +139,7 @@ Registered venue and amenity routes in main API entry point
 - Clear all filters button
 
 **Venue Cards Display:**
+
 - Primary image with hover effect
 - Price badge (per hour)
 - Venue name and location
@@ -137,6 +148,7 @@ Registered venue and amenity routes in main API entry point
 - "View Details" button
 
 **JavaScript Functionality:**
+
 - Async fetch from `/api/venues`
 - Real-time filter application
 - Sort options (6 types: newest, oldest, price, capacity)
@@ -145,6 +157,7 @@ Registered venue and amenity routes in main API entry point
 - Error handling with user feedback
 
 **Sorting Options:**
+
 1. Newest First (default)
 2. Oldest First
 3. Price: Low to High
@@ -159,6 +172,7 @@ Registered venue and amenity routes in main API entry point
 **Features:**
 
 **UI Components:**
+
 - Breadcrumb navigation
 - Image gallery with thumbnails (clickable)
 - Venue header with pricing
@@ -169,6 +183,7 @@ Registered venue and amenity routes in main API entry point
 - Booking card (sticky sidebar)
 
 **Information Display:**
+
 - Full venue details (name, address, type, capacity)
 - Dynamic pricing breakdown:
   - Base price per hour
@@ -179,6 +194,7 @@ Registered venue and amenity routes in main API entry point
 - Full amenity list with category icons
 
 **Booking Form:**
+
 - Event date picker (min: today)
 - Start time selector
 - End time selector
@@ -186,6 +202,7 @@ Registered venue and amenity routes in main API entry point
 - Submit button with protection badge
 
 **JavaScript Functionality:**
+
 - Async fetch from `/api/venues/:id`
 - Dynamic content rendering
 - Image gallery interaction
@@ -197,6 +214,7 @@ Registered venue and amenity routes in main API entry point
 ### 6. Database Schema (Already in place from Cycle 1) ✅
 
 Tables being utilized:
+
 - `venues` - Main venue data
 - `amenities` - Available amenities
 - `venue_amenities` - Many-to-many relationship
@@ -210,6 +228,7 @@ Tables being utilized:
 ### Completed Tasks (75%)
 
 ✅ **Backend Development (100%)**
+
 - [x] Venue model with 11 methods
 - [x] Venue controller with 7 endpoints
 - [x] Amenity controller with 6 endpoints
@@ -219,6 +238,7 @@ Tables being utilized:
 - [x] Pagination implementation
 
 ✅ **Frontend Development (100%)**
+
 - [x] Venue listing page with filters
 - [x] Venue detail page with booking form
 - [x] Responsive design with TailwindCSS
@@ -227,6 +247,7 @@ Tables being utilized:
 - [x] Sorting and pagination UI
 
 ✅ **Security (100%)**
+
 - [x] Role-based access control
 - [x] JWT authentication middleware
 - [x] Ownership validation
@@ -235,11 +256,12 @@ Tables being utilized:
 
 ### In Progress Tasks (0%)
 
-*No tasks currently in progress - awaiting next phase*
+_No tasks currently in progress - awaiting next phase_
 
 ### Pending Tasks (25%)
 
 ⏳ **Remaining Cycle 2 Features:**
+
 - [ ] Availability calendar management API (3 endpoints)
 - [ ] Venue manager dashboard page
 - [ ] Image upload system (real file uploads vs JSON paths)
@@ -252,6 +274,7 @@ Tables being utilized:
 ### API Endpoints Summary
 
 **Venue Endpoints (6):**
+
 ```
 GET    /api/venues              - Search with filters, pagination, sorting
 GET    /api/venues/:id          - Get single venue with amenities & availability
@@ -262,6 +285,7 @@ DELETE /api/venues/:id          - Soft delete venue (protected, ownership valida
 ```
 
 **Amenity Endpoints (6):**
+
 ```
 GET    /api/amenities           - List all amenities (optional category filter)
 GET    /api/amenities/categories - Get amenity categories
@@ -274,6 +298,7 @@ DELETE /api/amenities/:id       - Delete amenity (protected, admin only)
 ### Query Parameters
 
 **GET /api/venues:**
+
 - `page` (int) - Page number (default: 1)
 - `limit` (int) - Results per page (default: 12)
 - `search` (string) - Keyword search
@@ -286,6 +311,7 @@ DELETE /api/amenities/:id       - Delete amenity (protected, admin only)
 - `sortBy` (enum) - Sort order (created_at_desc, price_asc, etc.)
 
 **GET /api/amenities:**
+
 - `category` (enum) - Filter by category
 
 ### Response Format
@@ -304,11 +330,14 @@ All API responses follow this structure:
 ```
 
 **Venue Search Response:**
+
 ```json
 {
   "success": true,
   "data": {
-    "venues": [/* array of venue objects */],
+    "venues": [
+      /* array of venue objects */
+    ],
     "pagination": {
       "currentPage": 1,
       "totalPages": 5,
@@ -322,6 +351,7 @@ All API responses follow this structure:
 ```
 
 **Venue Detail Response:**
+
 ```json
 {
   "success": true,
@@ -339,16 +369,18 @@ All API responses follow this structure:
       "latitude": 14.5995,
       "longitude": 120.9842,
       "max_capacity": 500,
-      "base_price": 5000.00,
-      "cleaning_fee": 500.00,
-      "security_deposit": 2000.00,
+      "base_price": 5000.0,
+      "cleaning_fee": 500.0,
+      "security_deposit": 2000.0,
       "images": "[\"image1.jpg\", \"image2.jpg\"]",
       "popularity_score": 4.5,
       "is_active": true,
       "manager_id": 2,
       "manager_name": "John Doe",
       "manager_email": "john@example.com",
-      "amenities": [/* array of amenity objects */],
+      "amenities": [
+        /* array of amenity objects */
+      ],
       "availability_summary": {
         "available_days": 25,
         "blocked_days": 5
@@ -361,6 +393,7 @@ All API responses follow this structure:
 ### Database Queries
 
 **Advanced Search Query:**
+
 ```sql
 SELECT v.*, u.full_name as manager_name, u.email as manager_email,
        MATCH(v.venue_name, v.description, v.city) AGAINST(:search) as relevance
@@ -379,6 +412,7 @@ LIMIT :limit OFFSET :offset
 ```
 
 **Performance:**
+
 - Uses indexes on venue_type, city, max_capacity, base_price, is_active
 - Full-text index on venue_name, description, city
 - Foreign key index on manager_id
@@ -393,6 +427,7 @@ LIMIT :limit OFFSET :offset
 
 **Decision:** Use `is_active` flag instead of hard deletes  
 **Rationale:**
+
 - Preserves booking history
 - Allows venue reactivation
 - Maintains referential integrity
@@ -402,12 +437,14 @@ LIMIT :limit OFFSET :offset
 
 **Decision:** JSON array of paths (temporary)  
 **Rationale:**
+
 - Quick implementation for Cycle 2
 - Deferred complex file upload to later cycle
 - Allows frontend development to proceed
 - Will be replaced with proper upload system
 
 **Future Implementation:**
+
 - File upload to `frontend/assets/venues/`
 - Image validation (type, size, dimensions)
 - Thumbnail generation
@@ -417,12 +454,14 @@ LIMIT :limit OFFSET :offset
 
 **Decision:** Limit/Offset with count query  
 **Rationale:**
+
 - Simple to implement
 - Works well for small-medium datasets
 - Standard pagination UI
 - Easy to cache
 
 **Performance Consideration:**
+
 - Count query runs separately
 - May add cursor-based pagination later for scale
 - Current limit: 12 venues per page
@@ -431,12 +470,14 @@ LIMIT :limit OFFSET :offset
 
 **Decision:** Full-text search with MySQL MATCH/AGAINST  
 **Rationale:**
+
 - Built-in MySQL feature
 - Good performance with FULLTEXT index
 - Natural language search
 - Relevance scoring
 
 **Limitations:**
+
 - Requires MySQL 5.6+ with InnoDB
 - Cannot search on numeric fields
 - Boolean mode available for advanced searches
@@ -445,6 +486,7 @@ LIMIT :limit OFFSET :offset
 
 **Decision:** Vanilla JavaScript (no framework)  
 **Rationale:**
+
 - Faster initial development
 - No build process required
 - Lightweight and fast
@@ -466,16 +508,16 @@ LIMIT :limit OFFSET :offset
 
 ### Frontend Performance
 
-| Metric                 | Value    |
-| ---------------------- | -------- |
-| Page Load Time         | 1.2s     |
-| First Contentful Paint | 0.8s     |
-| Time to Interactive    | 1.5s     |
-| Total Page Size        | 450 KB   |
-| JavaScript Size        | 12 KB    |
-| CSS Size (TailwindCSS) | 3.5 MB * |
+| Metric                 | Value     |
+| ---------------------- | --------- |
+| Page Load Time         | 1.2s      |
+| First Contentful Paint | 0.8s      |
+| Time to Interactive    | 1.5s      |
+| Total Page Size        | 450 KB    |
+| JavaScript Size        | 12 KB     |
+| CSS Size (TailwindCSS) | 3.5 MB \* |
 
-*TailwindCSS CDN is large but cached after first load
+\*TailwindCSS CDN is large but cached after first load
 
 ### Database Performance
 
@@ -493,6 +535,7 @@ LIMIT :limit OFFSET :offset
 ### Authentication & Authorization
 
 ✅ **Implemented:**
+
 1. JWT token validation on protected routes
 2. Role-based access control (admin, venue_manager, organizer)
 3. Ownership validation (managers can only edit their venues)
@@ -502,6 +545,7 @@ LIMIT :limit OFFSET :offset
 ### Input Validation
 
 ✅ **Implemented:**
+
 1. Required field validation
 2. Data type validation (int, decimal, string)
 3. Enum validation (venue_type, category)
@@ -551,12 +595,14 @@ LIMIT :limit OFFSET :offset
 ### Minor Issues
 
 1. **Image Upload Not Implemented**
+
    - Current: JSON paths to images
    - Impact: Low (workaround functional)
    - Priority: Medium
    - Resolution: Cycle 3 or 4
 
 2. **No Venue Approval Workflow**
+
    - Current: Venues auto-approved on creation
    - Impact: Low (small user base)
    - Priority: Low
@@ -584,11 +630,13 @@ LIMIT :limit OFFSET :offset
 ### Priority 1: Availability Calendar API
 
 **Endpoints to Create:**
+
 1. `GET /api/venues/:id/availability` - Get availability for date range
 2. `POST /api/venues/:id/availability` - Block/unblock specific dates
 3. `PUT /api/venues/:id/availability/bulk` - Bulk update availability
 
 **Frontend Components:**
+
 - Calendar widget on venue detail page
 - Date picker with unavailable dates disabled
 - Visual availability indicators
@@ -600,6 +648,7 @@ LIMIT :limit OFFSET :offset
 **Page:** `pages/venue-manager.html`
 
 **Features:**
+
 - List of manager's venues
 - Quick stats (total venues, bookings, revenue)
 - Create/Edit venue forms
@@ -611,6 +660,7 @@ LIMIT :limit OFFSET :offset
 ### Priority 3: Image Upload System
 
 **Implementation:**
+
 - File upload endpoint `/api/venues/:id/images`
 - Server-side validation (type, size, dimensions)
 - Storage in `frontend/assets/venues/`
@@ -706,18 +756,21 @@ LIMIT :limit OFFSET :offset
 ### Planned Features
 
 1. **Booking System**
+
    - Create booking endpoint
    - Conflict detection
    - Status management (pending, confirmed, cancelled)
    - Email notifications
 
 2. **Payment Integration**
+
    - PayPal integration (test mode)
    - GCash integration (test mode)
    - Payment status tracking
    - Receipt generation
 
 3. **Contract Generation**
+
    - PDF contract templates
    - Dynamic field population
    - E-signature integration
@@ -757,6 +810,7 @@ LIMIT :limit OFFSET :offset
 ### Contact
 
 For questions about Cycle 2 implementation:
+
 - Review code in `backend/models/Venue.php`
 - Review code in `backend/controllers/VenueController.php`
 - Review code in `pages/venues.html`
@@ -770,4 +824,4 @@ For questions about Cycle 2 implementation:
 
 ---
 
-*This document will be updated as Cycle 2 progresses to 100% completion.*
+_This document will be updated as Cycle 2 progresses to 100% completion._

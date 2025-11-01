@@ -97,6 +97,7 @@
 ### 5. API Endpoints ✅
 
 **Authentication (Cycle 1):**
+
 ```
 POST   /api/auth/register           ✅
 POST   /api/auth/login              ✅
@@ -107,6 +108,7 @@ GET    /api/health                  ✅
 ```
 
 **Venue Management (Cycle 2):**
+
 ```
 GET    /api/venues                  ✅ (Search with filters & pagination)
 GET    /api/venues/:id              ✅ (Venue details with amenities)
@@ -117,6 +119,7 @@ DELETE /api/venues/:id              ✅ (Delete venue - protected)
 ```
 
 **Amenity Management (Cycle 2):**
+
 ```
 GET    /api/amenities               ✅ (List all amenities)
 GET    /api/amenities/categories    ✅ (Get categories)
